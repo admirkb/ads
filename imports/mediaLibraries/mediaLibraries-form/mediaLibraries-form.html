@@ -1,0 +1,91 @@
+<div style="background:black;">
+  <!--<h4 class="modal-title">{{mediaLibraryModelItem.name}}</h4>-->
+
+  <form [ngFormModel]="mediaLibrarysForm" #f="ngForm">
+
+    <div *ngIf="mediaLibraryModelItem.imageAsData != null" layout-gt-sm="row" style="text-align:center">
+      <img [(src)]="mediaLibraryModelItem.imageAsData" />
+    </div>
+
+    <div layout-gt-sm="row">
+
+      <div style="display:none;">
+        <label class="copy1">New MediaLibrary: </label>
+        <input [(ngModel)]="mediaLibraryModelItem._id" ngControl="_id" placeholder="Name" style="color:black;" />
+        <input [(ngModel)]="mediaLibraryModelItem.days" ngControl="days" />
+        <input [(ngModel)]="mediaLibraryModelItem.times" ngControl="times" />
+        <input [(ngModel)]="mediaLibraryModelItem.createDate" ngControl="createDate" />
+         <input [(ngModel)]="mediaLibraryModelItem.imageAsData" ngControl="imageAsData" placeholder="imageAsData" />
+        <input [(ngModel)]="mediaLibraryModelItem.width" ngControl="width" />
+        <input [(ngModel)]="mediaLibraryModelItem.height" ngControl="height" />
+      </div>
+
+
+
+      <div *ngIf="action == 'add' || action == 'update'">
+
+        <table style="background-color:black;width:100%;">
+          <tr>
+            <td style="text-align:left;color:red;">Heading</td>
+            <td>
+              <input style="color:white;background:black;" type="text" [(ngModel)]="mediaLibraryModelItem.heading" ngControl="heading"
+                placeholder="Heading" required/>
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align:left;color:red;">Detail</td>
+            <td>
+              <input style="color:white;background:black;" type="text" [(ngModel)]="mediaLibraryModelItem.detail" ngControl="detail" placeholder="Detail"
+                minlength="3" />
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align:left;color:red;">Duration</td>
+            <td>
+              <input style="color:white;background:black;" type="text" [(ngModel)]="mediaLibraryModelItem.duration" ngControl="duration"
+                placeholder="Duration"  />
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align:left;color:red;">Html</td>
+            <td>
+              <input style="color:white;background:black;" type="text" [(ngModel)]="mediaLibraryModelItem.html" ngControl="html"
+                placeholder="Html"/>
+            </td>
+          </tr>
+        </table>
+
+
+
+
+        <ad-media-upload (ImageChangedEvent)="ImageChangedEvent($event)"></ad-media-upload>
+      </div>
+
+
+
+
+
+    </div>
+
+
+    <div class="footer">
+
+
+      <div style="text-align:right; background:transparent; width:100%;">
+        <button *ngIf="action == 'add'" (click)="addMediaLibrary(f.value)" class="btn btn-primary btn-sm">Add MediaLibrary!</button>
+        <button *ngIf="action == 'update'" (click)="updateMediaLibrary(f.value)" class="btn btn-primary btn-sm">Modify MediaLibrary!</button>
+        <button *ngIf="action == 'delete'" (click)="deleteMediaLibrary(f.value)" class="btn btn-primary btn-sm">Delete MediaLibrary!</button>
+        <button type="button" class="btn btn-primary btn-sm" (click)="hideDialog()">Close</button>
+      </div>
+
+
+
+
+    </div>
+  </form>
+
+
+
+
+</div>
+<hr/>
